@@ -733,7 +733,8 @@ class LeRobotDataset(torch.utils.data.Dataset):
 
             if self.features[key]["dtype"] not in ["image", "video"]:
                 item = frame[key].numpy() if isinstance(frame[key], torch.Tensor) else frame[key]
-                self.episode_buffer[key].append(item)
+                if key not in ["episode_index","task"]:
+                    self.episode_buffer[key].append(item)
             elif self.features[key]["dtype"] in ["image", "video"]:
                 img_path = self._get_image_file_path(
                     episode_index=self.episode_buffer["episode_index"], image_key=key, frame_index=frame_index

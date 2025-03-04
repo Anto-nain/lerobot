@@ -1,0 +1,3 @@
+Clé wandb = 1491f26c3494ffe0ea037937bba86b01a91c8771
+
+commande train : python lerobot/scripts/train.py --dataset.repo_id=lirislab/bimanual_scene1_take1 --policy.type=act --output_dir=outputs/train/act_train --job_name=act_so100_bimanual --wandb.enable=true

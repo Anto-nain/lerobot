@@ -1,0 +1,13 @@
+python lerobot/scripts/control_robot.py \
+  --robot.type=so100_bimanual \
+  --control.type=record \
+  --control.fps=15 \
+  --control.repo_id=${HF_USER}/eval_bimanual_scene1_take1 \
+  --control.tags='["bimanual"]' \
+  --control.warmup_time_s=5 \
+  --control.episode_time_s=30 \
+  --control.reset_time_s=20 \
+  --control.num_episodes=10 \
+  --control.push_to_hub=true \
+  --control.policy.path=outputs/train/act_train/checkpoints/last/pretrained_model \
+  --control.single_task="Grab a two pieces block and dismantle it"
