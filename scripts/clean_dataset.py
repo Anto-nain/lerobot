@@ -1,6 +1,6 @@
 import lerobot
 import torch
-from lerobot.common.datasets.lerobot_dataset import LeRobotDataset, LeRobotDatasetMetadata
+from lerobot.common.datasets.lerobot_dataset import LeRobotDataset
 
 repo_id = "lirislab/bimanual_scene1_take4"
 dataset = LeRobotDataset(repo_id)
@@ -53,10 +53,15 @@ for i in range(dataset.meta.total_episodes):
     print(dataset.episode_buffer)
     
     for frame in episode_frames:
-        print(frame)
-        dataset.add_frame(frame)
-
-    dataset.save_episode(task=dataset.meta.tasks[dataset.meta.episodes[i]['task_index']])
+        #print(frame)
+        try:
+            for key in ["task", "action", "observation.state", "observation.images.top", "observation.images.front","timestamp","frame_index","index","task_index"]:
+                dataset.episode_buffer[key].append(frame[key])
+            dataset.episode_buffer["size"] += 1
+        except Exception as e:
+            print(e)
+            print(frame)
+    dataset.save_episode()
 
 # Consolidate the dataset
 dataset.consolidate()

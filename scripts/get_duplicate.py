@@ -21,6 +21,8 @@ for episode_index in range(dataset.meta.total_episodes):
 
     for frame_index in range(start_idx, end_idx):
         frame = dataset[frame_index]
+        print(frame)
+        break
         current_leader_positions, current_follower_positions = get_motor_positions(frame)
 
         if not (previous_leader_positions is None or previous_follower_positions is None or
@@ -30,6 +32,7 @@ for episode_index in range(dataset.meta.total_episodes):
         else:
             previous_leader_positions = current_leader_positions
             previous_follower_positions = current_follower_positions
+    break
         
 
 
